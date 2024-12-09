@@ -20,6 +20,30 @@ function RightMenu(props) {
         });
     };
 
+    const menuItems = user.uesrData && user.userData.isAuth ?
+        [
+            {
+                key: 'logout',
+                label: <a onClick={logoutHandler}>Logout</a>
+            }
+        ] :
+        [
+            {
+                key: 'mail',
+                label: <a href="login">Signin</a>,
+            },
+            {
+                key: 'app',
+                label: <a href="/register">Signup</a>,
+            }
+        ];
+
+    return <Menu mode={props.mode} items={menuItems} />
+}
+
+export default RightMenu
+
+/*     
     if (user.userData && !user.userData.isAuth) {
         return (
             <Menu mode={props.mode}>
@@ -41,6 +65,4 @@ function RightMenu(props) {
             </Menu>
         )
     }
-}
-
-export default RightMenu
+ */

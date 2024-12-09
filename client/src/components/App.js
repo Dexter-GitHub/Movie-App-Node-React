@@ -20,7 +20,7 @@ function App() {
     return (
         <Suspense fallback={(<div>Loading...</div>)}>            
             <NavBar />
-            <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)'}}>
+            <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 155px)'}}>
                 <Routes>                
                     <Route path="/" element={<LandingPageWithAuth/>} />
                     <Route path="/login" element={<LoginPageWithAuth/>}/>

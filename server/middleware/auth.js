@@ -7,7 +7,11 @@ let auth = async (req, res, next) => {
     let token = req.cookies.w_auth;
 
     if (!token) {
-        return res.status(401).json({ isAuth: false, error: true, message: "No token provided"});
+        // 로그인하지 않은 사용자에 대해 인증이 되지 않음을 알림
+        return res.status(200).json({
+            isAuth: false,
+            message: "Not authenticated",
+        });        
     }
 
     // 토큰을 복호화 한 후 유저를 찾는다.  
