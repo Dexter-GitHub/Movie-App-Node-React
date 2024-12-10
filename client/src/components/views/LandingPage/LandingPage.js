@@ -11,16 +11,17 @@ function LandingPage() {
 
     useEffect(() => {
       const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-      fetchMovies(endpoint)
+      fetchMovies(endpoint);
+      /* 아래 주석은 Node 서버의 경고 표시를 삭제해 준다. */
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     const fetchMovies = (endpoint) => {
         fetch(endpoint)
             .then(response => response.json())
-            .then(response => {
-                console.log(response.results);
+            .then(response => {                
                 /* "..."을 사용하면 기존 배열을 수정하지 않고 새 배열을 만들 수 있다 
-                * 기존 배열의 불변성 유지 */
+                 * 기존 배열의 불변성 유지 */
                 setMovies([...Movies, ...response.results])    
                 setMainMovieIamge(response.results[0])                
                 setCurrentPage(response.page)
@@ -49,7 +50,8 @@ function LandingPage() {
                 <Row gutter={[16, 16]}>
                     {Movies && Movies.map((movie, index) => (
                         <React.Fragment key={index}>
-                            <GridCards 
+                            <GridCards
+                                landingPage
                                 image={movie.poster_path ? 
                                     `${IMAGE_BASE_URL}w500${movie.poster_path}` : null }
                                 movieId={movie.id}
@@ -58,9 +60,7 @@ function LandingPage() {
                         </React.Fragment>
                     ))}
                 </Row>
-
-            </div>
-            
+            </div>            
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <button onClick={loadMoreItems}> Load More </button>
             </div>
