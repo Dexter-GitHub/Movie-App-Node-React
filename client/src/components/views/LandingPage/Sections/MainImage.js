@@ -7,10 +7,8 @@ function MainImage(props) {
             rgba(0,0,0,0) 39%, 
             rgba(0,0,0,0) 41%, 
             rgba(0,0,0,0.65) 100%),
-            url('${props.image}')`,
+            url('${props.image}') center/cover no-repeat`,
             height: '500px',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             width: '100%',
             position: 'relative'
          }}>

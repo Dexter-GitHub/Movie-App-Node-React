@@ -24,7 +24,7 @@ function RightMenu(props) {
         [
             {
                 key: 'logout',
-                label: <a onClick={logoutHandler}>Logout</a>
+                label: <a href="/" onClick={logoutHandler}>Logout</a>
             }
         ] :
         [
