@@ -4,11 +4,11 @@ import MainImage from './Sections/MainImage';
 import GridCards from '../commons/GridCards';
 import { Row } from 'antd';
 
-function LandingPage() {
+function LandingPage() {    
     const [Movies, setMovies] = useState([])
     const [MainMovieIamge, setMainMovieIamge] = useState(null)
     const [CurrentPage, setCurrentPage] = useState(0)
-
+    
     useEffect(() => {
       const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
       fetchMovies(endpoint);

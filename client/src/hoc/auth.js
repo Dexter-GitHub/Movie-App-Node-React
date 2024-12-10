@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { auth } from '../_actions/user_action';
 import { useNavigate } from 'react-router-dom';
 
-export default function (SpecificComponent, option, adminRoute = null) {
+export default function Auth(SpecificComponent, option, adminRoute = null) {
     // [option]
     // null: 아무나 출입이 가능한 페이지
     // true: 로그인한 유저만 출입이 가능한 페이지
@@ -12,7 +12,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
         let user = useSelector(state => state.user);
         const dispatch = useDispatch(); 
         const navigate = useNavigate();
-               
+        
         useEffect(() => {
             /* 페이지 이동시 계속 호출됨 (dispatch) */
             dispatch(auth()).then(response => {
@@ -28,13 +28,13 @@ export default function (SpecificComponent, option, adminRoute = null) {
                         navigate('/');
                     }
                     else {
-                        if (!option) {                                                        
+                        if (!option && option != null) {                                                        
                             navigate('/');
                         }
                     }
                 }
             })            
-        }, [])
+        }, [dispatch, navigate])
 
         return (
             <SpecificComponent {...props} user={user}/>

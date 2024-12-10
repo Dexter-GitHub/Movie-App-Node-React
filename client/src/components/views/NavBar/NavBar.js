@@ -5,7 +5,7 @@ import { Drawer, Button } from 'antd';
 import { AlignRightOutlined } from '@ant-design/icons';
 import './Sections/Navbar.css'
 
-function NavBar() {
+function NavBar() {    
     const [visible, setVisible] = useState(false)
     const showDrawer = () => {
         setVisible(true)

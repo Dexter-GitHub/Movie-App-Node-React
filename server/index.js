@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 app.use('/users', require('./routes/users'));
+app.use('/favorite', require('./routes/favorite'))
 app.use('/uploads', express.static('uploads'));
 
 const mongoose = require('mongoose');

@@ -19,8 +19,8 @@ function RightMenu(props) {
             }
         });
     };
-
-    const menuItems = user.uesrData && user.userData.isAuth ?
+    
+    const menuItems = user.userData && user.userData.isAuth ?
         [
             {
                 key: 'logout',
