@@ -30,7 +30,7 @@ function RightMenu(props) {
         [
             {
                 key: 'mail',
-                label: <a href="login">Signin</a>,
+                label: <a href="/login">Signin</a>,
             },
             {
                 key: 'app',
@@ -42,27 +42,3 @@ function RightMenu(props) {
 }
 
 export default RightMenu
-
-/*     
-    if (user.userData && !user.userData.isAuth) {
-        return (
-            <Menu mode={props.mode}>
-                <Menu.Item key="mail">
-                    <a href="/login">Signin</a>
-                </Menu.Item>
-                <Menu.Item key="app">
-                    <a href="/register">Signup</a>
-                </Menu.Item>
-            </Menu>
-        )
-    }
-    else {
-        return (
-            <Menu mode={props.mode}>
-                <Menu.Item key="logout">
-                    <a onClick={logoutHandler}>Logout</a>
-                </Menu.Item>
-            </Menu>
-        )
-    }
- */

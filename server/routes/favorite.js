@@ -55,4 +55,15 @@ router.post('/addToFavorite', async (req, res) => {
     }
 })
 
+router.post('/getFavoritedMovie', async (req, res) => {    
+    try {
+        const favorites = await Favorite.find({ 'userFrom': req.body.userFrom })
+
+        return res.status(200).json({ success: true, favorites })
+    }
+    catch(err) {
+        return res.status(400).json({ success: false, message: err.message })
+    }
+})
+
 module.exports = router;
