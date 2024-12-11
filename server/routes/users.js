@@ -3,10 +3,6 @@ const router = express.Router();
 const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 
-router.get('/', (req, res) => {
-    res.send('Hello World!!!~');
-})
-
 router.get('/auth', auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
@@ -21,7 +17,7 @@ router.get('/auth', auth, (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-    // 회원 가입 할때 필요한 정보들을 clinet에서 가져오면
+    // 회원 가입 할때 필요한 정보들을 client에서 가져오면
     // 그것들을 데이터 베이스에 넣어준다.
     const user = new User(req.body)
 
@@ -35,8 +31,7 @@ router.post('/register', (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    try {
-        console.log("hello");
+    try {        
         const user = await User.findOne({ email: req.body.email });
 
         if (!user) {
@@ -65,8 +60,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get('/logout', auth, async (req, res) => {
-    try {
-        console.log(req.user);
+    try {        
         const user = await User.findOneAndUpdate(
             { _id: req.user._id },
             { token: "", tokenExp: "" }
