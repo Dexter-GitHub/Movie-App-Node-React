@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import Favorite from './Sections/Favorite';
+import LikeDislikes from './Sections/LikeDislikes';
 import GridCards from '../commons/GridCards';
 import { Row } from 'antd';
 
@@ -19,7 +20,8 @@ function MovieDetail() {
 
         fetch(endpointInfo)
             .then(response => response.json())
-            .then(response => {                  
+            .then(response => { 
+                console.log(response)                 
                 setMovie(response)
             })
 
@@ -74,6 +76,13 @@ function MovieDetail() {
                         ))}
                     </Row>
                 }
+                <LikeDislikes 
+                    movie
+                    userId={localStorage.getItem('userId')}
+                    movieId={movieId}
+                />
+                <h2>Share yout opinions about {Movie.original_title}</h2>
+                <hr />
             </div>
         </div>
     )

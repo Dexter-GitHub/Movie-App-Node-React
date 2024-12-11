@@ -5,11 +5,12 @@ table {
 }
 
 td, th {
-    border: 1px solid #dddddd;
+    border: 1px solid #b3afafb7;
     text-align: left;
     padding: 8px;
 }
 
+/* 행 단위로 색상 교차 */
 tr:nth-child(even) {
     background-color: #dddddd;
 }

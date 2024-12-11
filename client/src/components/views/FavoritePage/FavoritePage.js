@@ -10,8 +10,7 @@ function FavoritePage() {
     const fetchFavoriteMovie = () => {
         Axios.post('/api/favorite/getFavoritedMovie', { userFrom: localStorage.getItem('userId') })
             .then(response => {
-                if (response.data.success) {
-                    console.log(response.data.favorites)
+                if (response.data.success) {                    
                     setFavorites(response.data.favorites)
                 }
                 else {
