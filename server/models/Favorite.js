@@ -18,7 +18,7 @@ const favoriteSchema = mongoose.Schema({
     movieRunTime: {
         type: String,
     },    
-}, { timestamp: true })
+}, { timestamps: true })
 
 const Favorite = mongoose.model('Favorite', favoriteSchema)
 

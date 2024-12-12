@@ -9,7 +9,6 @@ router.post('/favoriteNumber', async (req, res) => {
     
         // 그다음에 프론트에 다시 숫자 정보를 보내주기
         return res.status(200).json({ success: true, favoriteNumber: info.length })
-
     }
     catch(err) {
         return res.status(400).json({ success: false, message: err.message })

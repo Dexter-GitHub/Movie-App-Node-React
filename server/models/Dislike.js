@@ -6,14 +6,14 @@ const dislikeSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    // commentId: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Comment'
-    // },
+    commentId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    },
     movieId: {
         type: String        
     },
-}, { timestamp: true })
+}, { timestamps: true })
 
 const Dislike = mongoose.model('Dislike', dislikeSchema)
 

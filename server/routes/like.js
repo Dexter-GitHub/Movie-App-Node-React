@@ -6,9 +6,9 @@ const { Dislike } = require('../models/Dislike');
 router.post("/getLikes", async (req, res) => {
     let variable = req.body.movieId ?
         { userId: req.body.userId, movieId: req.body.movieId } :
-        {}
+        { commentId: req.body.commentId }
 
-    try {
+    try {        
         const likes = await Like.find(variable);
 
         return res.status(200).json({ success: true, likes })
@@ -20,7 +20,7 @@ router.post("/getLikes", async (req, res) => {
 router.post("/getDislikes", async (req, res) => {
     let variable = req.body.movieId ?
         { userId: req.body.userId, movieId: req.body.movieId } :
-        {}
+        { commentId: req.body.commentId }
 
     try {
         const dislikes = await Dislike.find(variable);
@@ -34,7 +34,7 @@ router.post("/getDislikes", async (req, res) => {
 router.post("/upLike", async (req, res) => {
     let variable = req.body.movieId ?
         { movieId: req.body.movieId, userId: req.body.userId } :
-        {}
+        { commentId: req.body.commentId, userId: req.body.userId }
 
     const like = new Like(variable);
 
@@ -52,7 +52,7 @@ router.post("/upLike", async (req, res) => {
 router.post("/unLike", async (req, res) => {
     let variable = req.body.movieId ?
         { movieId: req.body.movieId, userId: req.body.userId } :
-        {}
+        { commentId: req.body.commentId, userId: req.body.userId }
 
     try {
         await Like.findOneAndDelete(variable);
@@ -66,7 +66,7 @@ router.post("/unLike", async (req, res) => {
 router.post("/upDislike", async (req, res) => {
     let variable = req.body.movieId ?
         { movieId: req.body.movieId, userId: req.body.userId } :
-        {}
+        { commentId: req.body.commentId, userId: req.body.userID }
 
     const dislike = new Dislike(variable);
 
@@ -84,7 +84,7 @@ router.post("/upDislike", async (req, res) => {
 router.post("/unDislike", async (req, res) => {
     let variable = req.body.movieId ?
         { movieId: req.body.movieId, userId: req.body.userId } :
-        {}
+        { commentId: req.body.commentId, userId: req.body.userId }
 
     try {
         await Dislike.findOneAndDelete(variable);

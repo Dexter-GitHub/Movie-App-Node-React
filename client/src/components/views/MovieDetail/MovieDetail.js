@@ -5,23 +5,26 @@ import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import Favorite from './Sections/Favorite';
 import LikeDislikes from './Sections/LikeDislikes';
+import Comment from './Sections/Comment';
 import GridCards from '../commons/GridCards';
 import { Row } from 'antd';
+import Axios from 'axios';
 
 function MovieDetail() {
     const { movieId } = useParams();
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
+    const [Comments, setComments] = useState([])
     const [ActorToggle, setActorToggle] = useState(false)
     
-    useEffect(() => {        
+    useEffect(() => {     
+        const variable = { movieId }   
         let endpointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
         let endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
 
         fetch(endpointInfo)
             .then(response => response.json())
-            .then(response => { 
-                console.log(response)                 
+            .then(response => {                                
                 setMovie(response)
             })
 
@@ -30,7 +33,21 @@ function MovieDetail() {
             .then(response => {                
                 setCasts(response.cast)
             })
+
+        Axios.post('/api/comment/getComments', variable)
+            .then(response => {
+                if (response.data.success) {                    
+                    setComments(response.data.comments)
+                }
+            })
+            .catch(error => {
+                alert('코멘트 정보를 가져오는 것을 실패 하였습니다.')
+            })
     }, [movieId])
+
+    const refreshFunction = (newComment) => {
+        setComments(Comments.concat(newComment));
+    }
     
     const toggleAcotrView = () => {
         setActorToggle(!ActorToggle)
@@ -76,13 +93,20 @@ function MovieDetail() {
                         ))}
                     </Row>
                 }
-                <LikeDislikes 
-                    movie
-                    userId={localStorage.getItem('userId')}
-                    movieId={movieId}
-                />
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0'}}>
+                    <LikeDislikes 
+                        movie
+                        userId={localStorage.getItem('userId')}
+                        movieId={movieId}
+                    />
+                </div>
                 <h2>Share yout opinions about {Movie.original_title}</h2>
                 <hr />
+                <Comment 
+                    refreshFunction = {refreshFunction}
+                    commentLists={Comments}
+                    movieId={movieId}
+                />
             </div>
         </div>
     )

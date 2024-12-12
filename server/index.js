@@ -14,6 +14,7 @@ app.use(cors());
 app.use('/users', require('./routes/users'));
 app.use('/favorite', require('./routes/favorite'))
 app.use('/like', require('./routes/like'))
+app.use('/comment', require('./routes/comment'))
 app.use('/uploads', express.static('uploads'));
 
 const mongoose = require('mongoose');

@@ -11,8 +11,8 @@ function LikeDislikes(props) {
     let variable = useMemo(() => {
         return props.movie ? 
             { movieId: props.movieId, userId: props.userId } :
-            {}
-    }, [props])
+            { commentId: props.commentId, userId: props.userId }
+    }, [props])    
 
     useEffect(() => {
         Axios.post('/api/like/getLikes', variable)
@@ -30,22 +30,22 @@ function LikeDislikes(props) {
                     alert('Likes에 대한 정보를 가져오지 못했습니다.')
                 }
             })
+            
+        Axios.post('/api/like/getDislikes', variable)
+        .then(response => {
+            if (response.data.success) {                    
+                setDislikes(response.data.dislikes.length)
 
-            Axios.post('/api/like/getDislikes', variable)
-            .then(response => {
-                if (response.data.success) {                    
-                    setDislikes(response.data.dislikes.length)
-
-                    response.data.dislikes.forEach(dislike => {
-                        if (dislike.userId === props.userId) {
-                            setDislikeAction('disliked')
-                        }
-                    })
-                }
-                else {
-                    alert('Dislikes에 대한 정보를 가져오지 못했습니다.')
-                }
-            })
+                response.data.dislikes.forEach(dislike => {
+                    if (dislike.userId === props.userId) {
+                        setDislikeAction('disliked')
+                    }
+                })
+            }
+            else {
+                alert('Dislikes에 대한 정보를 가져오지 못했습니다.')
+            }
+        })
     }, [variable, props])
     
 
@@ -114,7 +114,7 @@ function LikeDislikes(props) {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <React.Fragment>
             <span key='comment-basci-like'>
                 <Tooltip title='Like'>
                     {LikeAction === 'liked' ?
@@ -133,7 +133,7 @@ function LikeDislikes(props) {
                 </Tooltip>                
                 <span style={{ paddingLeft: '8px', cursor: 'auto' }}> {Dislikes} </span>
             </span>
-        </div>
+        </React.Fragment>
     )
 }
 
